@@ -56,7 +56,7 @@ class BotService(private val bot: TelegramBot) {
                 val text = message.text() ?: continue
                 val parts = text.trim().split("@", limit = 2)
                 val username = parts.getOrNull(1)
-                if (username != null && username.equals(botUsername, ignoreCase = true)) {
+                if (username != null && !username.equals(botUsername, ignoreCase = true)) {
                     continue
                 }
                 val chatId = message.chat().id()
