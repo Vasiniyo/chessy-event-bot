@@ -10,7 +10,7 @@ import com.vasiniyo.app.lichess.LichessController
 import com.vasiniyo.app.model.BoardFactory
 import com.vasiniyo.app.render.BoardRenderService
 import com.vasiniyo.app.render.BoardSettings
-import com.vasiniyo.app.render.TextPiecePainter
+import com.vasiniyo.app.render.SvgPiecePainter
 import com.vasiniyo.app.telegram.command.DailyCommand
 import java.awt.Color
 import okhttp3.OkHttpClient
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory
 class BotService(private val bot: TelegramBot) {
     private val logger = LoggerFactory.getLogger(BotService::class.java)
 
-    private val piecePainter = TextPiecePainter()
+    private val piecePainter = SvgPiecePainter()
     private val httpClient = OkHttpClient()
     private val lichessApiService = LichessApiService(httpClient)
     private val boardService = BoardRenderService(piecePainter)

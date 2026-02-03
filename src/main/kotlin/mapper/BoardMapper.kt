@@ -47,6 +47,32 @@ object BoardMapper {
         }
     }
 
+    fun toXY(position: Position): Pair<Int, Int> {
+        val x =
+            when (position.file) {
+                File.A -> 0
+                File.B -> 1
+                File.C -> 2
+                File.D -> 3
+                File.E -> 4
+                File.F -> 5
+                File.G -> 6
+                File.H -> 7
+            }
+        val y =
+            when (position.rank) {
+                Rank.R1 -> 7
+                Rank.R2 -> 6
+                Rank.R3 -> 5
+                Rank.R4 -> 4
+                Rank.R5 -> 3
+                Rank.R6 -> 2
+                Rank.R7 -> 1
+                Rank.R8 -> 0
+            }
+        return x to y
+    }
+
     private fun indexToPosition(index: Int): Position {
         val file = File.entries[index % 8]
         val rank = Rank.entries[index / 8]

@@ -13,6 +13,7 @@ ktor = "2.3.7"
 kotlinx-serialization = "1.6.2"
 kotlinx-coroutines = "1.8.0"
 junit = "5.10.0"
+batik = "1.19"
 
 [libraries]
 telegram-bot = { group = "com.github.pengrad", name = "java-telegram-bot-api", version.ref = "telegram" }
@@ -29,5 +30,8 @@ ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlin
 
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+
+batik-transcoder = { group = "org.apache.xmlgraphics", name = "batik-transcoder", version.ref = "batik" }
+batik-codec = { group = "org.apache.xmlgraphics", name = "batik-codec", version.ref = "batik" }
 
 junit = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit" }
