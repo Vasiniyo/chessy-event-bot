@@ -29,7 +29,12 @@ object BoardMapper {
                 when (board.sideToMove) {
                     Side.WHITE -> PieceColor.WHITE
                     Side.BLACK -> PieceColor.BLACK
-                }
+                },
+            lastTurn =
+                listOf(
+                    indexToPosition(board.backup.last().move.from.ordinal),
+                    indexToPosition(board.backup.last().move.to.ordinal)
+                )
         )
     }
 
@@ -52,28 +57,59 @@ object BoardMapper {
         }
     }
 
-    fun toXY(position: Position): Pair<Int, Int> {
+    fun toXY(position: Position, turn: PieceColor): Pair<Int, Int> {
         val x =
-            when (position.file) {
-                File.A -> 0
-                File.B -> 1
-                File.C -> 2
-                File.D -> 3
-                File.E -> 4
-                File.F -> 5
-                File.G -> 6
-                File.H -> 7
+            when (turn) {
+                PieceColor.WHITE ->
+                    when (position.file) {
+                        File.A -> 0
+                        File.B -> 1
+                        File.C -> 2
+                        File.D -> 3
+                        File.E -> 4
+                        File.F -> 5
+                        File.G -> 6
+                        File.H -> 7
+                    }
+                PieceColor.BLACK -> {
+                    when (position.file) {
+                        File.A -> 7
+                        File.B -> 6
+                        File.C -> 5
+                        File.D -> 4
+                        File.E -> 3
+                        File.F -> 2
+                        File.G -> 1
+                        File.H -> 0
+                    }
+                }
             }
         val y =
-            when (position.rank) {
-                Rank.R1 -> 7
-                Rank.R2 -> 6
-                Rank.R3 -> 5
-                Rank.R4 -> 4
-                Rank.R5 -> 3
-                Rank.R6 -> 2
-                Rank.R7 -> 1
-                Rank.R8 -> 0
+            when (turn) {
+                PieceColor.WHITE -> {
+                    when (position.rank) {
+                        Rank.R1 -> 7
+                        Rank.R2 -> 6
+                        Rank.R3 -> 5
+                        Rank.R4 -> 4
+                        Rank.R5 -> 3
+                        Rank.R6 -> 2
+                        Rank.R7 -> 1
+                        Rank.R8 -> 0
+                    }
+                }
+                PieceColor.BLACK -> {
+                    when (position.rank) {
+                        Rank.R1 -> 0
+                        Rank.R2 -> 1
+                        Rank.R3 -> 2
+                        Rank.R4 -> 3
+                        Rank.R5 -> 4
+                        Rank.R6 -> 5
+                        Rank.R7 -> 6
+                        Rank.R8 -> 7
+                    }
+                }
             }
         return x to y
     }

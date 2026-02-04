@@ -29,7 +29,9 @@ class BotService(private val bot: TelegramBot) {
         BoardSettings(
             tileSize = 100,
             whiteTile = Color(255, 228, 238),
-            blackTile = Color(219, 112, 147)
+            blackTile = Color(219, 112, 147),
+            lastTurnWhiteTile = Color(255, 105, 180),
+            lastTurnBlackTile = Color(139, 70, 100)
         )
 
     fun sendPhoto(chatId: Long, bytes: ByteArray) {

@@ -6,4 +6,6 @@ data class BoardSettings(
     val tileSize: Int,
     val whiteTile: Color,
     val blackTile: Color,
+    val lastTurnWhiteTile: Color,
+    val lastTurnBlackTile: Color,
 )

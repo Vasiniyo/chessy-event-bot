@@ -9,10 +9,12 @@ class BoardRenderService(private val piecePainter: PiecePainter) {
                 board.turn,
                 settings.whiteTile,
                 settings.blackTile,
+                settings.lastTurnWhiteTile,
+                settings.lastTurnBlackTile,
                 settings.tileSize,
                 piecePainter
             )
-            .withEmptyBoard()
+            .withEmptyBoard(board.lastTurn)
             .withNumbers()
             .withPieces(board)
             .build()

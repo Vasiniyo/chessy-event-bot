@@ -15,18 +15,11 @@ class TextPiecePainter : PiecePainter {
         graphics2D.font = Font("Serif", Font.PLAIN, (tileSize * 0.8).toInt())
         graphics2D.color = Color.BLACK
         board.pieces.entries.forEach { (pos, piece) ->
-            val (x, y) = BoardMapper.toXY(pos)
+            val (x, y) = BoardMapper.toXY(pos, turn)
             val imgX = (x * tileSize) + tileSize / 6f
             val imgY = (y * tileSize) + tileSize * 0.75f
             val imgPiece = PieceRenderMapper.toStringPiece(piece)
             val oldTransform = graphics2D.transform
-            if (turn == PieceColor.BLACK) {
-                graphics2D.rotate(
-                    Math.PI,
-                    (x * tileSize + tileSize / 2.0),
-                    (y * tileSize + tileSize / 2.0)
-                )
-            }
             graphics2D.drawString(imgPiece, imgX, imgY)
             graphics2D.transform = oldTransform
         }

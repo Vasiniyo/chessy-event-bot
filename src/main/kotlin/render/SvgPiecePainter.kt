@@ -15,22 +15,13 @@ import org.apache.batik.transcoder.image.PNGTranscoder
 class SvgPiecePainter : PiecePainter {
     override fun paint(graphics2D: Graphics2D, board: Board, tileSize: Int, turn: PieceColor) {
         board.pieces.entries.forEach { (pos, piece) ->
-            val (x, y) = BoardMapper.toXY(pos)
+            val (x, y) = BoardMapper.toXY(pos, turn)
             val svg = SvgPieceResolver().resolve(piece)
             val pieceSize = tileSize.toFloat() - tileSize.toFloat() / 5
             val imgX = (x * tileSize) + (tileSize - pieceSize) / 2
             val imgY = (y * tileSize) + (tileSize - pieceSize) / 2
             val image = renderSvg(svg, pieceSize, pieceSize)
-            val drawY = if (turn == PieceColor.BLACK) imgY + pieceSize else imgY
-            val drawH = if (turn == PieceColor.BLACK) -pieceSize else pieceSize
-            graphics2D.drawImage(
-                image,
-                imgX.toInt(),
-                drawY.toInt(),
-                pieceSize.toInt(),
-                drawH.toInt(),
-                null
-            )
+            graphics2D.drawImage(image, imgX.toInt(), imgY.toInt(), null)
         }
     }
 
