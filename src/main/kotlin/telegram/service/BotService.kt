@@ -27,9 +27,9 @@ class BotService(private val bot: TelegramBot) {
     private val lichessController = LichessController(boardService, boardFactory)
     private val settings =
         BoardSettings(
-            tileSize = 60,
-            whiteTile = Color(240, 217, 181),
-            blackTile = Color(181, 136, 99),
+            tileSize = 100,
+            whiteTile = Color(255, 228, 238),
+            blackTile = Color(219, 112, 147)
         )
 
     fun sendPhoto(chatId: Long, bytes: ByteArray) {
