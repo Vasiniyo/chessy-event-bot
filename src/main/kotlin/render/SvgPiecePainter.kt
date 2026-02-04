@@ -1,6 +1,7 @@
 package com.vasiniyo.app.render
 
 import com.vasiniyo.app.domain.model.Board
+import com.vasiniyo.app.domain.model.PieceColor
 import com.vasiniyo.app.mapper.BoardMapper
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
@@ -12,14 +13,24 @@ import org.apache.batik.transcoder.TranscoderOutput
 import org.apache.batik.transcoder.image.PNGTranscoder
 
 class SvgPiecePainter : PiecePainter {
-    override fun paint(graphics2D: Graphics2D, board: Board, tileSize: Int) {
+    override fun paint(graphics2D: Graphics2D, board: Board, tileSize: Int, turn: PieceColor) {
         board.pieces.entries.forEach { (pos, piece) ->
             val (x, y) = BoardMapper.toXY(pos)
             val svg = SvgPieceResolver().resolve(piece)
-            val imgX = (x * tileSize)
-            val imgY = (y * tileSize)
-            val image = renderSvg(svg, tileSize.toFloat(), tileSize.toFloat())
-            graphics2D.drawImage(image, imgX, imgY, null)
+            val pieceSize = tileSize.toFloat() - tileSize.toFloat() / 5
+            val imgX = (x * tileSize) + (tileSize - pieceSize) / 2
+            val imgY = (y * tileSize) + (tileSize - pieceSize) / 2
+            val image = renderSvg(svg, pieceSize, pieceSize)
+            val drawY = if (turn == PieceColor.BLACK) imgY + pieceSize else imgY
+            val drawH = if (turn == PieceColor.BLACK) -pieceSize else pieceSize
+            graphics2D.drawImage(
+                image,
+                imgX.toInt(),
+                drawY.toInt(),
+                pieceSize.toInt(),
+                drawH.toInt(),
+                null
+            )
         }
     }
 

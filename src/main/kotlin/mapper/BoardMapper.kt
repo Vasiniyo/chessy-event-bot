@@ -24,7 +24,12 @@ object BoardMapper {
                         )
                     }
                 }
-            }
+            },
+            turn =
+                when (board.sideToMove) {
+                    Side.WHITE -> PieceColor.WHITE
+                    Side.BLACK -> PieceColor.BLACK
+                }
         )
     }
 

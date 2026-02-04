@@ -1,3 +1,6 @@
 package com.vasiniyo.app.domain.model
 
-data class Board(val pieces: Map<Position, Piece>)
+data class Board(
+    val pieces: Map<Position, Piece>,
+    val turn: PieceColor,
+)

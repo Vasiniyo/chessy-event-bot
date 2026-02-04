@@ -5,8 +5,15 @@ import java.awt.image.BufferedImage
 
 class BoardRenderService(private val piecePainter: PiecePainter) {
     fun getDailyChallenge(board: Board, settings: BoardSettings): BufferedImage {
-        return ImageBoardBuilder(settings.tileSize, piecePainter)
-            .withEmptyBoard(settings.whiteTile, settings.blackTile)
+        return ImageBoardBuilder(
+                board.turn,
+                settings.whiteTile,
+                settings.blackTile,
+                settings.tileSize,
+                piecePainter
+            )
+            .withEmptyBoard()
+            .withNumbers()
             .withPieces(board)
             .build()
     }
